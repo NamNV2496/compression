@@ -1,0 +1,672 @@
+45
+Thời sựChủ nhật, 20/7/2025, 10:37 (GMT+7)
+Tàu du lịch chìm trên biển Thiên Cầm, 34 người được cứu
+Tàu du lịch chở 34 người đi câu mực bị giông lốc đánh chìm trên biển Thiên Cầm, Hà Tĩnh, toàn bộ hành khách và thuyền viên được cứu sống sau hơn 10 phút gặp nạn.
+
+Tối 19/7, tàu du lịch Nguyễn Ngọc chở 30 khách và 4 thuyền viên đi câu mực tại đảo Bớc, cách bờ biển Thiên Cầm khoảng 0,5 hải lý (gần 1 km), thì gặp giông lốc kèm mưa lớn. Khoảng 19h20, sóng mạnh đánh chìm tàu, toàn bộ người trên tàu phải nhảy xuống biển thoát thân. Trước khi chìm, tàu đã phát tín hiệu cầu cứu đến trạm cứu hộ gần nhất.
+
+Nhận tin báo, Đồn Biên phòng Thiên Cầm phối hợp với chính quyền địa phương điều hai tàu cứu hộ và huy động thuyền ngư dân gần đó tiếp cận hiện trường. Sau khoảng 10 phút, toàn bộ 34 người được cứu lên thuyền an toàn.
+
+Trung tá Nguyễn Văn Khởi, Đồn trưởng Đồn Biên phòng Thiên Cầm, cho biết do sóng to, gió lớn, lực lượng chức năng không thể đưa các nạn nhân vào bờ ngay mà phải neo đậu tại chỗ để trú ẩn. Đến 0h30 ngày 20/7, các thuyền cứu hộ mới đưa được toàn bộ người gặp nạn vào bờ với sức khỏe ổn định.
+
+Tàu du lịch Nguyễn Ngọc làm bằng gỗ với sức chứa tối đa 40 người, thường chở khách từ bãi biển Thiên Cầm ra khơi 1-3 km để trải nghiệm câu mực đêm.
+Cùng thời điểm, nhiều xã ở Hà Tĩnh xuất hiện giông lốc, mưa lớn, làm tốc mái nhiều nhà dân và công trình. Vùng biển ghi nhận sóng cao, gió mạnh. Tại xã Cổ Đạm, 6 thuyền đánh cá cỡ nhỏ đang neo gần bờ bị sóng đánh lật. Đến sáng 20/7, lực lượng chức năng đã lai dắt các thuyền vào bờ. Riêng ngư dân Hoàng Văn Minh, 57 tuổi, ra khơi đánh cá một mình hiện chưa liên lạc được, chính quyền đang tổ chức tìm kiếm.
+
+Theo Đài Khí tượng Thủy văn Hà Tĩnh, do ảnh hưởng của bão Wipha, từ ngày 21/7 vùng biển Hà Tĩnh sẽ có gió mạnh dần lên cấp 6-7, giật cấp 8-9, sóng cao 2-4 m. Trên đất liền, từ chiều mai đến ngày 23/7, hoàn lưu phía Tây và Tây Nam của bão gây mưa diện rộng. Khu vực phía Nam Hà Tĩnh lượng mưa phổ biến 50-100 mm, phía Bắc 100-200 mm, có nơi trên 250 mm.
+
+Cũng trong ngày 19/7, tàu du lịch Vịnh Xanh 58 chở 53 người bị giông gió mạnh xô lật trên vịnh Hạ Long, cách bờ gần 3 hải lý. Rạng sáng 20/7, lực lượng chức năng tìm thêm ba thi thể, tổng số người tử nạn là 38, 10 người được cứu sống, còn 5 người mất tích.
+Unlocking Efficiency: How Zstandard Compression Revolutionized Our Redis Performance and Costs
+Joydeb Barman
+Joydeb Barman
+
+Follow
+5 min read
+·
+Jun 17, 2025
+4
+
+
+
+
+The Journey to Leaner, Faster Data: revMax Redis Compression Success Story
+
+In the fast-paced world of tech, optimizing performance and managing costs are constant battles. Every millisecond counts, and every byte stored impacts the bottom line. At redBus, In response to our ongoing need for scalable performance and robust support, we’ve been on a mission to continuously enhance our revMax platform (for more details on revMax , check out our previous article here: https://medium.com/redbus-in/dynamic-pricing-platform-3-5-8aaf9d78816d), which is crucial for dynamically pricing the busses based on multiple real-time signals. Here, we constantly work with complex Java objects that are updated in real-time. The size of these objects can vary significantly, ranging from kilobyes to several megabytes, depending on the number of via routes associated with each service. We’re thrilled to share a recent breakthrough that has delivered remarkable results: the successful implementation of Zstandard (Zstd) compression for our Redis key-value store.
+
+This wasn’t just a minor tweak; it was a fundamental shift from our previous plain JSON string storage to a significantly faster and more efficient compression algorithm. The impact has been profound, yielding both substantial business value and impressive technical efficiencies across our platforms.
+
+
+Memory Usage : Before the rollout when the memory was at its peak (~96%)
+The Challenge: Bloated Redis and Growing Pains
+Before this initiative, our Redis instances were storing data as plain serialized JSON strings. While functional, this approach consumed considerable memory, leading to:
+
+High memory pressure on our Redis servers
+Increased infrastructure costs as data volumes grew
+Potential bottlenecks impacting real-time data processing.
+We knew there was a better way to manage our key-value data without compromising performance or availability.
+
+The Solution: Embracing Zstandard (Zstd) Compression
+Our answer came in the form of Zstandard (Zstd), a fast, lossless compression algorithm. We’ve integrated Zstd to compress Redis values before storage and decompress them automatically upon retrieval.
+
+Here’s a simplified view of our new data flow:
+
+Write Operations: Object → JSON → Zstd Compress → Redis
+Read Operations: Redis → Zstd Decompress → JSON → Object
+This seamless integration required no changes to our core application logic, ensuring a smooth transition and rapid deployment. The compression and decompression overhead is negligible, typically occurring in sub-milliseconds.
+
+Why Zstandard? A Deep Dive into Our Compression Choice
+Choosing the right compression algorithm was critical. We needed a solution that offered a superior compression ratio without introducing significant latency, especially given Redis’s role as a high-throughput, low-latency data store. After careful evaluation, Zstandard (Zstd) emerged as the clear winner.
+
+Here’s why Zstd was the ideal choice for our Redis key-value compression:
+
+Exceptional Balance of Speed and Compression Ratio: Unlike older algorithms like Gzip, which can be slow for high-frequency operations, or simpler algorithms like LZ4, which offer speed but a lower compression ratio, Zstd strikes an impressive balance. It can achieve compression speeds comparable to LZ4 while delivering compression ratios closer to (or even exceeding) Gzip. This sweet spot was paramount for a real-time system like Redis.
+Scalable Performance: Zstd is designed to be highly performant across a range of workloads. Its optimized C implementation and intelligent dictionary capabilities contribute to its speed. For a system processing millions of key-value operations, high-speed compression and decompression are non-negotiable.
+Adaptive Compression Levels: Zstd offers a wide range of compression levels. This flexibility allows engineers to fine-tune the algorithm based on specific needs — prioritizing speed over ratio or vice-versa. For our use case, we opted for a level optimized to give us significant memory savings with minimal latency impact.
+Low Latency Overhead: Crucially for Redis, which thrives on in-memory operations, Zstd’s decompression speed is incredibly fast. This means that reading data, even after compression, adds only a negligible amount of overhead, ensuring our applications continue to experience sub-millisecond response times.
+Memory Efficiency: Beyond just reducing stored data size, Zstd’s design is inherently memory-efficient during both compression and decompression, which is a significant advantage when operating on memory-bound systems like Redis.
+Tangible Benefits: A Snapshot of Impact
+The results speak for themselves. Post-deployment, we’ve witnessed a dramatic improvement across key metrics:
+
+Up to 90% reduction in total memory/storage usage: This is a game-changer for our infrastructure costs.
+Smaller payloads = less bandwidth consumption: Enhancing network efficiency.
+Negligible latency overhead: Sub-millisecond compression/decompressions ensures performance remains top-tier.
+Fully backward compatible: No data loss or migration was required.
+Centralized logic: Handled efficiently within our Redis helper classes (RedisHelper.get/set()).
+
+Memory Usage : Declining trend after the rollout (currently at around 14% from the peak of ~96%)
+
+Impact Snapshot :Overall System (After Rollout)
+
+CPU utilization : After the rollout, slightly decreasing trend
+This translates directly to lower memory pressure, significantly better cache hit ratios, and substantial headroom for future growth. CPU utilization remains more stable and slightly reduced compared to before the release.
+
+Beyond Memory: Faster Performance and Scalability
+The benefits extend far beyond just memory savings:
+
+Faster Event Execution & Updates: With significantly reduced payload sizes and lower Redis latency, our pricing engine can now process and execute dynamic pricing logic much faster. This has led to an up to 20% improvement in the latency of applying pricing rules, boosting real-time pricing accuracy and system agility.
+Improved System Scalability & Cost Efficiency: With Redis memory usage plummeting dramatically, we’ve unlocked immense capacity. This optimization creates the ability to support a significantly higher number of live services (4x–5x of current), representing a substantial increase in our operational capacity without requiring any infrastructure upgrade on the Redis front. This newfound headroom allows us to scale our offerings more aggressively and efficiently than ever before.
+Conclusion: A Leap Forward in Efficiency
+The successful rollout of Zstandard compression in Redis marks a significant milestone in our commitment to building robust, high-performing, and cost-efficient systems. This initiative has not only delivered immediate and measurable improvements but has also set us up for sustainable, scalable growth. We’re excited about what this means for our services and for our continued ability to deliver exceptional value.
+
+Behind the Streams: Three Years Of Live at Netflix. Part 1.
+Netflix Technology Blog
+Netflix Technology Blog
+
+Follow
+10 min read
+·
+4 days ago
+246
+
+
+5
+
+
+
+By Sergey Fedorov, Chris Pham, Flavio Ribeiro, Chris Newton, and Wei Wei
+
+Many great ideas at Netflix begin with a question, and three years ago, we asked one of our boldest yet: if we were to entertain the world through Live — a format almost as old as television itself — how would we do it?
+
+What began with an engineering plan to pave the path towards our first Live comedy special, Chris Rock: Selective Outrage, has since led to hundreds of Live events ranging from the biggest comedy shows and NFL Christmas Games to record-breaking boxing fights and becoming the home of WWE.
+
+In our series Behind the Streams — where we take you through the technical journey of our biggest bets — we will do a multiple part deep-dive into the architecture of Live and what we learned while building it. Part one begins with the foundation we set for Live, and the critical decisions we made that influenced our approach.
+
+| But First: What Makes Live Streaming Different?
+While Live as a television format is not new, the streaming experience we intended to build required capabilities we did not have at the time. Despite 15 years of on-demand streaming under our belt, Live introduced new considerations influencing architecture and technology choices:
+
+
+References: 1. Content Pre-Positioning on Open Connect, 2.Load-Balancing Netflix Traffic at Global Scale
+This means that we had a lot to build in order to make Live work well on Netflix. That starts with making the right choices regarding the fundamentals of our Live Architecture.
+
+| Key Pillars of Netflix Live Architecture
+Our Live Technology needed to extend the same promise to members that we’ve made with on-demand streaming: great quality on as many devices as possible without interruptions. Live is one of many entertainment formats on Netflix, so we also needed to seamlessly blend Live events into the user experience, all while scaling to over 300 million global subscribers.
+
+When we started, we had nine months until the first launch. While we needed to execute quickly, we also wanted to architect for future growth in both magnitude and multitude of events. As a key principle, we leveraged our unique position of building support for a single product — Netflix — and having control over the full Live lifecycle, from Production to Screen.
+
+
+Dedicated Broadcast Facilities to Ingest Live Content from Production
+
+Live events can happen anywhere in the world, but not every location has Live facilities or great connectivity. To ensure secure and reliable live signal transport, we leverage distributed and highly connected broadcast operations centers, with specialized equipment for signal ingest and inspection, closed-captioning, graphics and advertisement management. We prioritized repeatability, conditioning engineering to launch live events consistently, reliably, and cost-effectively, leaning into automation wherever possible. As a result, we have been able to reduce the event-specific setup to the transmission between production and the Broadcast Operations Center, reusing the rest across events.
+
+Cloud-based Redundant Transcoding and Packaging Pipelines
+
+The feed received at the Broadcast Center contains a fully produced program, but still needs to be encoded and packaged for streaming on devices. We chose a Cloud-based approach to allow for dynamic scaling, flexibility in configuration, and ease of integration with our Digital Rights Management (DRM), content management, and content delivery services already deployed in the cloud. We leverage AWS MediaConnect and AWS MediaLive to acquire feeds in the cloud and transcode them into various video quality levels with bitrates tailored per show. We built a custom packager to better integrate with our delivery and playback systems. We also built a custom Live Origin to ensure strict read and write SLAs for Live segments.
+
+Scaling Live Content Delivery to millions of viewers with Open Connect CDN
+
+In order for the produced media assets to be streamed, they need to be transferred from a few AWS locations, where Live Origin is deployed, to hundreds of millions of devices worldwide. We leverage Netflix’s CDN, Open Connect, to scale Live asset delivery. Open Connect servers are placed close to the viewers at over 6K locations and connected to AWS locations via a dedicated Open Connect Backbone network.
+
+
+18K+ servers in 6K+ locations, in Internet Exchanges, or embedded into ISP networks
+
+Open Connect Backbone connects servers in Internet Exchange locations to 5 AWS regions
+By enabling Live delivery on Open Connect, we build on top of $1B+ in Netflix investments over the last 12 years focused on scaling the network and optimizing the performance of delivery servers. By sharing capacity across on-demand and Live viewership we improve utilization, and by caching past Live content on the same servers used for on-demand streaming, we can easily enable catch-up viewing.
+
+Optimizing Live Playback for Device Compatibility, Scale, Quality, and Stability
+
+To make Live accessible to the majority of our customers without upgrading their streaming devices, we settled on using HTTPS-based Live Streaming. While UDP-based protocols can provide additional features like ultra-low latency, HTTPS has ubiquitous support among devices and compatibility with delivery and encoding systems. Furthermore, we use AVC and HEVC video codecs, transcode with multiple quality levels up from SD to 4K, and use a 2-second segment duration to balance compression efficiency, infrastructure load, and latency. While prioritizing streaming quality and playback stability, we have also achieved industry standard latency from camera to device, and continue to improve it.
+
+To configure playback, the device player receives a playback manifest at the play start. The manifest contains items like the encoding bitrates and CDN servers players should use. We deliver the manifest from the cloud instead of the CDN, as it allows us to personalize the configuration for each device. To reference segments of the stream, the manifest includes a segment template that is used by devices to map a wall-clock time to URLs on the CDN. Using a segment template vs periodic polling for manifest updates minimizes network dependencies, CDN server load, and overhead on resource-constrained devices, like smart TVs, thus improving both scalability and stability of our system. While streaming, the player monitors network performance and dynamically chooses the bitrate and CDN server, maximizing streaming quality while minimizing rebuffering.
+
+Run Discovery and Playback Control Services in the Cloud
+
+So far, we have covered the streaming path from Camera to Device. To make the stream fully work, we also need to orchestrate across all systems, and ensure viewers can find and start the Live event. This functionality is performed by dozens of Cloud services, with functions like playback configuration, personalization, or metrics collection. These services tend to receive disproportionately higher loads around Live event start time, and Cloud deployment provides flexibility in dynamically scaling compute resources. Moreover, as Live demand tends to be localized, we are able to balance load across multiple AWS regions, better utilizing our global footprint. Deployment in the cloud also allows us to build a user experience where we embed Live content into a broader selection of entertainment options in the UI, like on-demand titles or Games.
+
+Centralize Real-time Metrics in the Cloud with Specialized Tools and Facilities
+
+With control over ingest, encoding pipelines, the Open Connect CDN, and device players, we have nearly end-to-end observability into the Live workflow. During Live, we collect system and user metrics in real-time (e.g., where members see the title on Netflix and their quality of experience), alerting us to poor user experiences or degraded system performance. Our real-time monitoring is built using a mix of internally developed tools, such as Atlas, Mantis, and Lumen, and open-source technologies, such as Kafka and Druid, processing up to 38 million events per second during some of our largest live events while providing critical metrics and operational insights in a matter of seconds. Furthermore, we set up dedicated “Control Center” facilities, which bring key metrics together to the operational team that monitors the event in real-time.
+
+| Our key learnings so far
+Building new functionality always brings fresh challenges and opportunities to learn, especially with a system as complex as Live. Even after three years, we’re still learning every day how to deliver Live events more effectively. Here are a few key highlights:
+
+Extensive testing: Prior to Live we heavily relied on the predictable flow of on-demand traffic for pre-release canaries or A/B tests to validate deployments. But Live traffic was not always available, especially not at the scale representative of a big launch. As a result, we spent considerable effort to:
+
+Generate internal “test streams,” which engineers use to run integration, regression, or smoke tests as part of the development lifecycle.
+Build synthetic load testing capabilities to stress test cloud and CDN systems. We use 2 approaches, allowing us to generate up to 100K starts-per-second:
+— Capture, modify, and replay past Live production traffic, representing a diversity of user devices and request patterns.
+— Virtualize Netflix devices and generate traffic against CDN or Cloud endpoints to test the impact of the latest changes across all systems.
+Run automated failure injection, forcing missing or corrupted segments from the encoding pipeline, loss of a cloud region, network drop, or server timeouts.
+Regular practice: Despite rigorous pre-release testing, nothing beats a production environment, especially when operating at scale. We learned that having a regular schedule with diverse Live content is essential to making improvements while balancing the risks of member impact. We run A/B tests, perform chaos testing, operational exercises, and train operational teams for upcoming launches.
+
+Viewership predictions: We use prediction-based techniques to pre-provision Cloud and CDN capacity, and share forecasts with our ISP and Cloud partners ahead of time so they can plan network and compute resources. Then we complement them with reactive scaling of cloud systems powering sign-up, log-in, title discovery, and playback services to account for viewership exceeding our predictions. We have found success with forward-looking real-time viewership predictions during a live event, allowing us to take steps to mitigate risks earlier, before more members are impacted.
+
+Graceful degradation: Despite our best efforts, we can (and did!) find ourselves in a situation where viewership exceeded our predictions and provisioned capacity. In this case, we developed a number of levers to continue streaming, even if it means gradually removing some nice-to-have features. For example, we use service-level prioritized load shedding to prioritize live traffic over non-critical traffic (like pre-fetch). Beyond that, we can lighten the experience, like dialing down personalization, disabling bookmarks, or lowering the maximum streaming quality. Our load tests include scenarios where we under-scale systems to validate desired behavior.
+
+Retry storms: When systems reach capacity, our key focus is to avoid cascading issues or further overloading systems with retries. Beyond system retries, users may retry manually — we’ve seen a 10x increase in traffic load due to stream restarts after viewing interruptions of as little as 30 seconds. We spent considerable time understanding device retry behavior in the presence of issues like network timeouts or missing segments. As a result, we implemented strategies like server-guided backoff for device retries, absorbing spikes via prioritized traffic shedding at Cloud Edge Gateway, and re-balancing traffic between cloud regions.
+
+Contingency planning: “Everyone has a plan until they get punched in the mouth” is very relevant for Live. When something breaks, there is practically no time for troubleshooting. For large events, we set up in-person launch rooms with engineering owners of critical systems. For quick detection and response, we developed a small set of metrics as early indicators of issues, and have extensive runbooks for common operational issues. We don’t learn on launch day; instead, launch teams practice failure response via Game Day exercises ahead of time. Finally, our runbooks extend beyond engineering, covering escalation to executive leadership and coordination across functions like Customer Service, Production, Communications, or Social.
+
+Our commitment to enhancing the member experience doesn’t end at the “Thanks for Watching!” screen. Shortly after each live stream, we dive into metrics to identify areas for improvement. Our Data & Insights team conducts comprehensive analyses, A/B tests, and consumer research to ensure the next event is even more delightful for our members. We leverage insights on member behavior, preferences, and expectations to refine the Netflix product experience and optimize our Live technology — like reducing latency by ~10 seconds through A/B tests, without affecting quality or stability.
+
+| What’s next on our Live journey?
+Despite three years of effort, we are far from done! In fact, we are just getting started, actively building on the learnings shared above to deliver more joy to our members with Live events. To support the growing number of Live titles and new formats, like FIFA WWC in 2027, we keep building our broadcast and delivery infrastructure and are actively working to further improve the Live experience.
+
+In this post, we’ve provided a broad overview and have barely scratched the surface. In the upcoming posts, we will dive deeper into key pillars of our Live systems, covering our encoding, delivery, playback, and user experience investments in more detail.
+
+Getting this far would not have been possible without the hard work of dozens of teams across Netflix, who collaborate closely to design, build, and operate Live systems: Operations and Reliability, Encoding Technologies, Content Delivery, Device Playback, Streaming Algorithms, UI Engineering, Search and Discovery, Messaging, Content Promotion and Distribution, Data Platform, Cloud Infrastructure, Tooling and Productivity, Program Management, Data Science & Engineering, Product Management, Globalization, Consumer Insights, Ads, Security, Payments, Live Production, Experience and Design, Product Marketing and Customer Service, amongst many others.
+
+Foundation Model for Personalized Recommendation
+Netflix Technology Blog
+Netflix Technology Blog
+
+Follow
+11 min read
+·
+Mar 22, 2025
+1.7K
+
+
+38
+
+
+
+By Ko-Jen Hsiao, Yesu Feng and Sudarshan Lamkhede
+
+Motivation
+Netflix’s personalized recommender system is a complex system, boasting a variety of specialized machine learned models each catering to distinct needs including “Continue Watching” and “Today’s Top Picks for You.” (Refer to our recent overview for more details). However, as we expanded our set of personalization algorithms to meet increasing business needs, maintenance of the recommender system became quite costly. Furthermore, it was difficult to transfer innovations from one model to another, given that most are independently trained despite using common data sources. This scenario underscored the need for a new recommender system architecture where member preference learning is centralized, enhancing accessibility and utility across different models.
+
+Particularly, these models predominantly extract features from members’ recent interaction histories on the platform. Yet, many are confined to a brief temporal window due to constraints in serving latency or training costs. This limitation has inspired us to develop a foundation model for recommendation. This model aims to assimilate information both from members’ comprehensive interaction histories and our content at a very large scale. It facilitates the distribution of these learnings to other models, either through shared model weights for fine tuning or directly through embeddings.
+
+The impetus for constructing a foundational recommendation model is based on the paradigm shift in natural language processing (NLP) to large language models (LLMs). In NLP, the trend is moving away from numerous small, specialized models towards a single, large language model that can perform a variety of tasks either directly or with minimal fine-tuning. Key insights from this shift include:
+
+A Data-Centric Approach: Shifting focus from model-centric strategies, which heavily rely on feature engineering, to a data-centric one. This approach prioritizes the accumulation of large-scale, high-quality data and, where feasible, aims for end-to-end learning.
+Leveraging Semi-Supervised Learning: The next-token prediction objective in LLMs has proven remarkably effective. It enables large-scale semi-supervised learning using unlabeled data while also equipping the model with a surprisingly deep understanding of world knowledge.
+These insights have shaped the design of our foundation model, enabling a transition from maintaining numerous small, specialized models to building a scalable, efficient system. By scaling up semi-supervised training data and model parameters, we aim to develop a model that not only meets current needs but also adapts dynamically to evolving demands, ensuring sustainable innovation and resource efficiency.
+
+Data
+At Netflix, user engagement spans a wide spectrum, from casual browsing to committed movie watching. With over 300 million users at the end of 2024, this translates into hundreds of billions of interactions — an immense dataset comparable in scale to the token volume of large language models (LLMs). However, as in LLMs, the quality of data often outweighs its sheer volume. To harness this data effectively, we employ a process of interaction tokenization, ensuring meaningful events are identified and redundancies are minimized.
+
+Tokenizing User Interactions: Not all raw user actions contribute equally to understanding preferences. Tokenization helps define what constitutes a meaningful “token” in a sequence. Drawing an analogy to Byte Pair Encoding (BPE) in NLP, we can think of tokenization as merging adjacent actions to form new, higher-level tokens. However, unlike language tokenization, creating these new tokens requires careful consideration of what information to retain. For instance, the total watch duration might need to be summed or engagement types aggregated to preserve critical details.
+
+Figure 1.Tokenization of user interaction history by merging actions on the same title, preserving important information.
+This tradeoff between granular data and sequence compression is akin to the balance in LLMs between vocabulary size and context window. In our case, the goal is to balance the length of interaction history against the level of detail retained in individual tokens. Overly lossy tokenization risks losing valuable signals, while too granular a sequence can exceed practical limits on processing time and memory.
+
+Even with such strategies, interaction histories from active users can span thousands of events, exceeding the capacity of transformer models with standard self attention layers. In recommendation systems, context windows during inference are often limited to hundreds of events — not due to model capability but because these services typically require millisecond-level latency. This constraint is more stringent than what is typical in LLM applications, where longer inference times (seconds) are more tolerable.
+
+To address this during training, we implement two key solutions:
+
+Sparse Attention Mechanisms: By leveraging sparse attention techniques such as low-rank compression, the model can extend its context window to several hundred events while maintaining computational efficiency. This enables it to process more extensive interaction histories and derive richer insights into long-term preferences.
+Sliding Window Sampling: During training, we sample overlapping windows of interactions from the full sequence. This ensures the model is exposed to different segments of the user’s history over multiple epochs, allowing it to learn from the entire sequence without requiring an impractically large context window.
+At inference time, when multi-step decoding is needed, we can deploy KV caching to efficiently reuse past computations and maintain low latency.
+
+These approaches collectively allow us to balance the need for detailed, long-term interaction modeling with the practical constraints of model training and inference, enhancing both the precision and scalability of our recommendation system.
+
+Information in Each ‘Token’: While the first part of our tokenization process focuses on structuring sequences of interactions, the next critical step is defining the rich information contained within each token. Unlike LLMs, which typically rely on a single embedding space to represent input tokens, our interaction events are packed with heterogeneous details. These include attributes of the action itself (such as locale, time, duration, and device type) as well as information about the content (such as item ID and metadata like genre and release country). Most of these features, especially categorical ones, are directly embedded within the model, embracing an end-to-end learning approach. However, certain features require special attention. For example, timestamps need additional processing to capture both absolute and relative notions of time, with absolute time being particularly important for understanding time-sensitive behaviors.
+
+To enhance prediction accuracy in sequential recommendation systems, we organize token features into two categories:
+
+Request-Time Features: These are features available at the moment of prediction, such as log-in time, device, or location.
+Post-Action Features: These are details available after an interaction has occurred, such as the specific show interacted with or the duration of the interaction.
+To predict the next interaction, we combine request-time features from the current step with post-action features from the previous step. This blending of contextual and historical information ensures each token in the sequence carries a comprehensive representation, capturing both the immediate context and user behavior patterns over time.
+
+Considerations for Model Objective and Architecture
+As previously mentioned, our default approach employs the autoregressive next-token prediction objective, similar to GPT. This strategy effectively leverages the vast scale of unlabeled user interaction data. The adoption of this objective in recommendation systems has shown multiple successes [1–3]. However, given the distinct differences between language tasks and recommendation tasks, we have made several critical modifications to the objective.
+
+Firstly, during the pretraining phase of typical LLMs, such as GPT, every target token is generally treated with equal weight. In contrast, in our model, not all user interactions are of equal importance. For instance, a 5-minute trailer play should not carry the same weight as a 2-hour full movie watch. A greater challenge arises when trying to align long-term user satisfaction with specific interactions and recommendations. To address this, we can adopt a multi-token prediction objective during training, where the model predicts the next n tokens at each step instead of a single token[4]. This approach encourages the model to capture longer-term dependencies and avoid myopic predictions focused solely on immediate next events.
+
+Secondly, we can use multiple fields in our input data as auxiliary prediction objectives in addition to predicting the next item ID, which remains the primary target. For example, we can derive genres from the items in the original sequence and use this genre sequence as an auxiliary target. This approach serves several purposes: it acts as a regularizer to reduce overfitting on noisy item ID predictions, provides additional insights into user intentions or long-term genre preferences, and, when structured hierarchically, can improve the accuracy of predicting the target item ID. By first predicting auxiliary targets, such as genre or original language, the model effectively narrows down the candidate list, simplifying subsequent item ID prediction.
+
+Unique Challenges for Recommendation FM
+In addition to the infrastructure challenges posed by training bigger models with substantial amounts of user interaction data that are common when trying to build foundation models, there are several unique hurdles specific to recommendations to make them viable. One of unique challenges is entity cold-starting.
+
+At Netflix, our mission is to entertain the world. New titles are added to the catalog frequently. Therefore the recommendation foundation models require a cold start capability, which means the models need to estimate members’ preferences for newly launched titles before anyone has engaged with them. To enable this, our foundation model training framework is built with the following two capabilities: Incremental training and being able to do inference with unseen entities.
+
+Incremental training : Foundation models are trained on extensive datasets, including every member’s history of plays and actions, making frequent retraining impractical. However, our catalog and member preferences continually evolve. Unlike large language models, which can be incrementally trained with stable token vocabularies, our recommendation models require new embeddings for new titles, necessitating expanded embedding layers and output components. To address this, we warm-start new models by reusing parameters from previous models and initializing new parameters for new titles. For example, new title embeddings can be initialized by adding slight random noise to existing average embeddings or by using a weighted combination of similar titles’ embeddings based on metadata. This approach allows new titles to start with relevant embeddings, facilitating faster fine-tuning. In practice, the initialization method becomes less critical when more member interaction data is used for fine-tuning.
+Dealing with unseen entities : Even with incremental training, it’s not always guaranteed to learn efficiently on new entities (ex: newly launched titles). It’s also possible that there will be some new entities that are not included/seen in the training data even if we fine-tune foundation models on a frequent basis. Therefore, it’s also important to let foundation models use metadata information of entities and inputs, not just member interaction data. Thus, our foundation model combines both learnable item id embeddings and learnable embeddings from metadata. The following diagram demonstrates this idea.
+Figure 2. Titles are associated with various metadata, such as genres, storylines, and tones. Each type of metadata could be represented by averaging its respective embeddings, which are then concatenated to form the overall metadata-based embedding for the title.
+To create the final title embedding, we combine this metadata-based embedding with a fully-learnable ID-based embedding using a mixing layer. Instead of simply summing these embeddings, we use an attention mechanism based on the “age” of the entity. This approach allows new titles with limited interaction data to rely more on metadata, while established titles can depend more on ID-based embeddings. Since titles with similar metadata can have different user engagement, their embeddings should reflect these differences. Introducing some randomness during training encourages the model to learn from metadata rather than relying solely on ID embeddings. This method ensures that newly-launched or pre-launch titles have reasonable embeddings even with no user interaction data.
+
+Downstream Applications and Challenges
+Our recommendation foundation model is designed to understand long-term member preferences and can be utilized in various ways by downstream applications:
+
+Direct Use as a Predictive Model The model is primarily trained to predict the next entity a user will interact with. It includes multiple predictor heads for different tasks, such as forecasting member preferences for various genres. These can be directly applied to meet diverse business needs..
+Utilizing embeddings The model generates valuable embeddings for members and entities like videos, games, and genres. These embeddings are calculated in batch jobs and stored for use in both offline and online applications. They can serve as features in other models or be used for candidate generation, such as retrieving appealing titles for a user. High-quality title embeddings also support title-to-title recommendations. However, one important consideration is that the embedding space has arbitrary, uninterpretable dimensions and is incompatible across different model training runs. This poses challenges for downstream consumers, who must adapt to each retraining and redeployment, risking bugs due to invalidated assumptions about the embedding structure. To address this, we apply an orthogonal low-rank transformation to stabilize the user/item embedding space, ensuring consistent meaning of embedding dimensions, even as the base foundation model is retrained and redeployed.
+Fine-Tuning with Specific Data The model’s adaptability allows for fine-tuning with application-specific data. Users can integrate the full model or subgraphs into their own models, fine-tuning them with less data and computational power. This approach achieves performance comparable to previous models, despite the initial foundation model requiring significant resources.
+Scaling Foundation Models for Netflix Recommendations
+In scaling up our foundation model for Netflix recommendations, we draw inspiration from the success of large language models (LLMs). Just as LLMs have demonstrated the power of scaling in improving performance, we find that scaling is crucial for enhancing generative recommendation tasks. Successful scaling demands robust evaluation, efficient training algorithms, and substantial computing resources. Evaluation must effectively differentiate model performance and identify areas for improvement. Scaling involves data, model, and context scaling, incorporating user engagement, external reviews, multimedia assets, and high-quality embeddings. Our experiments confirm that the scaling law also applies to our foundation model, with consistent improvements observed as we increase data and model size.
+
+Figure 3. The relationship between model parameter size and relative performance improvement. The plot demonstrates the scaling law in recommendation modeling, showing a trend of increased performance with larger model sizes. The x-axis is logarithmically scaled to highlight growth across different magnitudes.
+Conclusion
+In conclusion, our Foundation Model for Personalized Recommendation represents a significant step towards creating a unified, data-centric system that leverages large-scale data to increase the quality of recommendations for our members. This approach borrows insights from Large Language Models (LLMs), particularly the principles of semi-supervised learning and end-to-end training, aiming to harness the vast scale of unlabeled user interaction data. Addressing unique challenges, like cold start and presentation bias, the model also acknowledges the distinct differences between language tasks and recommendation. The Foundation Model allows various downstream applications, from direct use as a predictive model to generate user and entity embeddings for other applications, and can be fine-tuned for specific canvases. We see promising results from downstream integrations. This move from multiple specialized models to a more comprehensive system marks an exciting development in the field of personalized recommendation systems.
+
+Acknowledgements
+Contributors to this work (name in alphabetical order): Ai-Lei Sun Aish Fenton Anne Cocos Anuj Shah Arash Aghevli Baolin Li Bowei Yan Dan Zheng Dawen Liang Ding Tong Divya Gadde Emma Kong Gary Yeh Inbar Naor Jin Wang Justin Basilico Kabir Nagrecha Kevin Zielnicki Linas Baltrunas Lingyi Liu Luke Wang Matan Appelbaum Michael Tu Moumita Bhattacharya Pablo Delgado Qiuling Xu Rakesh Komuravelli Raveesh Bhalla Rob Story Roger Menezes Sejoon Oh Shahrzad Naseri Swanand Joshi Trung Nguyen Vito Ostuni Wei Wang Zhe Zhang
+
+Reference
+C. K. Kang and J. McAuley, “Self-Attentive Sequential Recommendation,” 2018 IEEE International Conference on Data Mining (ICDM), Singapore, 2018, pp. 197–206, doi: 10.1109/ICDM.2018.00035.
+F. Sun et al., “BERT4Rec: Sequential Recommendation with Bidirectional Encoder Representations from Transformer,” Proceedings of the 28th ACM International Conference on Information and Knowledge Management (CIKM ‘19), Beijing, China, 2019, pp. 1441–1450, doi: 10.1145/3357384.3357895.
+J. Zhai et al., “Actions Speak Louder than Words: Trillion-Parameter Sequential Transducers for Generative Recommendations,” arXiv preprint arXiv:2402.17152, 2024.
+F. Gloeckle, B. Youbi Idrissi, B. Rozière, D. Lopez-Paz, and G. Synnaeve, “Better & Faster Large Language Models via Multi-token Prediction,” arXiv preprint arXiv:2404.19737, Apr. 2024.
+
+45
+Thời sựChủ nhật, 20/7/2025, 10:37 (GMT+7)
+Tàu du lịch chìm trên biển Thiên Cầm, 34 người được cứu
+Tàu du lịch chở 34 người đi câu mực bị giông lốc đánh chìm trên biển Thiên Cầm, Hà Tĩnh, toàn bộ hành khách và thuyền viên được cứu sống sau hơn 10 phút gặp nạn.
+
+Tối 19/7, tàu du lịch Nguyễn Ngọc chở 30 khách và 4 thuyền viên đi câu mực tại đảo Bớc, cách bờ biển Thiên Cầm khoảng 0,5 hải lý (gần 1 km), thì gặp giông lốc kèm mưa lớn. Khoảng 19h20, sóng mạnh đánh chìm tàu, toàn bộ người trên tàu phải nhảy xuống biển thoát thân. Trước khi chìm, tàu đã phát tín hiệu cầu cứu đến trạm cứu hộ gần nhất.
+
+Nhận tin báo, Đồn Biên phòng Thiên Cầm phối hợp với chính quyền địa phương điều hai tàu cứu hộ và huy động thuyền ngư dân gần đó tiếp cận hiện trường. Sau khoảng 10 phút, toàn bộ 34 người được cứu lên thuyền an toàn.
+
+Trung tá Nguyễn Văn Khởi, Đồn trưởng Đồn Biên phòng Thiên Cầm, cho biết do sóng to, gió lớn, lực lượng chức năng không thể đưa các nạn nhân vào bờ ngay mà phải neo đậu tại chỗ để trú ẩn. Đến 0h30 ngày 20/7, các thuyền cứu hộ mới đưa được toàn bộ người gặp nạn vào bờ với sức khỏe ổn định.
+
+Tàu du lịch Nguyễn Ngọc làm bằng gỗ với sức chứa tối đa 40 người, thường chở khách từ bãi biển Thiên Cầm ra khơi 1-3 km để trải nghiệm câu mực đêm.
+Cùng thời điểm, nhiều xã ở Hà Tĩnh xuất hiện giông lốc, mưa lớn, làm tốc mái nhiều nhà dân và công trình. Vùng biển ghi nhận sóng cao, gió mạnh. Tại xã Cổ Đạm, 6 thuyền đánh cá cỡ nhỏ đang neo gần bờ bị sóng đánh lật. Đến sáng 20/7, lực lượng chức năng đã lai dắt các thuyền vào bờ. Riêng ngư dân Hoàng Văn Minh, 57 tuổi, ra khơi đánh cá một mình hiện chưa liên lạc được, chính quyền đang tổ chức tìm kiếm.
+
+Theo Đài Khí tượng Thủy văn Hà Tĩnh, do ảnh hưởng của bão Wipha, từ ngày 21/7 vùng biển Hà Tĩnh sẽ có gió mạnh dần lên cấp 6-7, giật cấp 8-9, sóng cao 2-4 m. Trên đất liền, từ chiều mai đến ngày 23/7, hoàn lưu phía Tây và Tây Nam của bão gây mưa diện rộng. Khu vực phía Nam Hà Tĩnh lượng mưa phổ biến 50-100 mm, phía Bắc 100-200 mm, có nơi trên 250 mm.
+
+Cũng trong ngày 19/7, tàu du lịch Vịnh Xanh 58 chở 53 người bị giông gió mạnh xô lật trên vịnh Hạ Long, cách bờ gần 3 hải lý. Rạng sáng 20/7, lực lượng chức năng tìm thêm ba thi thể, tổng số người tử nạn là 38, 10 người được cứu sống, còn 5 người mất tích.
+Unlocking Efficiency: How Zstandard Compression Revolutionized Our Redis Performance and Costs
+Joydeb Barman
+Joydeb Barman
+
+Follow
+5 min read
+·
+Jun 17, 2025
+4
+
+
+
+
+The Journey to Leaner, Faster Data: revMax Redis Compression Success Story
+
+In the fast-paced world of tech, optimizing performance and managing costs are constant battles. Every millisecond counts, and every byte stored impacts the bottom line. At redBus, In response to our ongoing need for scalable performance and robust support, we’ve been on a mission to continuously enhance our revMax platform (for more details on revMax , check out our previous article here: https://medium.com/redbus-in/dynamic-pricing-platform-3-5-8aaf9d78816d), which is crucial for dynamically pricing the busses based on multiple real-time signals. Here, we constantly work with complex Java objects that are updated in real-time. The size of these objects can vary significantly, ranging from kilobyes to several megabytes, depending on the number of via routes associated with each service. We’re thrilled to share a recent breakthrough that has delivered remarkable results: the successful implementation of Zstandard (Zstd) compression for our Redis key-value store.
+
+This wasn’t just a minor tweak; it was a fundamental shift from our previous plain JSON string storage to a significantly faster and more efficient compression algorithm. The impact has been profound, yielding both substantial business value and impressive technical efficiencies across our platforms.
+
+
+Memory Usage : Before the rollout when the memory was at its peak (~96%)
+The Challenge: Bloated Redis and Growing Pains
+Before this initiative, our Redis instances were storing data as plain serialized JSON strings. While functional, this approach consumed considerable memory, leading to:
+
+High memory pressure on our Redis servers
+Increased infrastructure costs as data volumes grew
+Potential bottlenecks impacting real-time data processing.
+We knew there was a better way to manage our key-value data without compromising performance or availability.
+
+The Solution: Embracing Zstandard (Zstd) Compression
+Our answer came in the form of Zstandard (Zstd), a fast, lossless compression algorithm. We’ve integrated Zstd to compress Redis values before storage and decompress them automatically upon retrieval.
+
+Here’s a simplified view of our new data flow:
+
+Write Operations: Object → JSON → Zstd Compress → Redis
+Read Operations: Redis → Zstd Decompress → JSON → Object
+This seamless integration required no changes to our core application logic, ensuring a smooth transition and rapid deployment. The compression and decompression overhead is negligible, typically occurring in sub-milliseconds.
+
+Why Zstandard? A Deep Dive into Our Compression Choice
+Choosing the right compression algorithm was critical. We needed a solution that offered a superior compression ratio without introducing significant latency, especially given Redis’s role as a high-throughput, low-latency data store. After careful evaluation, Zstandard (Zstd) emerged as the clear winner.
+
+Here’s why Zstd was the ideal choice for our Redis key-value compression:
+
+Exceptional Balance of Speed and Compression Ratio: Unlike older algorithms like Gzip, which can be slow for high-frequency operations, or simpler algorithms like LZ4, which offer speed but a lower compression ratio, Zstd strikes an impressive balance. It can achieve compression speeds comparable to LZ4 while delivering compression ratios closer to (or even exceeding) Gzip. This sweet spot was paramount for a real-time system like Redis.
+Scalable Performance: Zstd is designed to be highly performant across a range of workloads. Its optimized C implementation and intelligent dictionary capabilities contribute to its speed. For a system processing millions of key-value operations, high-speed compression and decompression are non-negotiable.
+Adaptive Compression Levels: Zstd offers a wide range of compression levels. This flexibility allows engineers to fine-tune the algorithm based on specific needs — prioritizing speed over ratio or vice-versa. For our use case, we opted for a level optimized to give us significant memory savings with minimal latency impact.
+Low Latency Overhead: Crucially for Redis, which thrives on in-memory operations, Zstd’s decompression speed is incredibly fast. This means that reading data, even after compression, adds only a negligible amount of overhead, ensuring our applications continue to experience sub-millisecond response times.
+Memory Efficiency: Beyond just reducing stored data size, Zstd’s design is inherently memory-efficient during both compression and decompression, which is a significant advantage when operating on memory-bound systems like Redis.
+Tangible Benefits: A Snapshot of Impact
+The results speak for themselves. Post-deployment, we’ve witnessed a dramatic improvement across key metrics:
+
+Up to 90% reduction in total memory/storage usage: This is a game-changer for our infrastructure costs.
+Smaller payloads = less bandwidth consumption: Enhancing network efficiency.
+Negligible latency overhead: Sub-millisecond compression/decompressions ensures performance remains top-tier.
+Fully backward compatible: No data loss or migration was required.
+Centralized logic: Handled efficiently within our Redis helper classes (RedisHelper.get/set()).
+
+Memory Usage : Declining trend after the rollout (currently at around 14% from the peak of ~96%)
+
+Impact Snapshot :Overall System (After Rollout)
+
+CPU utilization : After the rollout, slightly decreasing trend
+This translates directly to lower memory pressure, significantly better cache hit ratios, and substantial headroom for future growth. CPU utilization remains more stable and slightly reduced compared to before the release.
+
+Beyond Memory: Faster Performance and Scalability
+The benefits extend far beyond just memory savings:
+
+Faster Event Execution & Updates: With significantly reduced payload sizes and lower Redis latency, our pricing engine can now process and execute dynamic pricing logic much faster. This has led to an up to 20% improvement in the latency of applying pricing rules, boosting real-time pricing accuracy and system agility.
+Improved System Scalability & Cost Efficiency: With Redis memory usage plummeting dramatically, we’ve unlocked immense capacity. This optimization creates the ability to support a significantly higher number of live services (4x–5x of current), representing a substantial increase in our operational capacity without requiring any infrastructure upgrade on the Redis front. This newfound headroom allows us to scale our offerings more aggressively and efficiently than ever before.
+Conclusion: A Leap Forward in Efficiency
+The successful rollout of Zstandard compression in Redis marks a significant milestone in our commitment to building robust, high-performing, and cost-efficient systems. This initiative has not only delivered immediate and measurable improvements but has also set us up for sustainable, scalable growth. We’re excited about what this means for our services and for our continued ability to deliver exceptional value.
+
+Behind the Streams: Three Years Of Live at Netflix. Part 1.
+Netflix Technology Blog
+Netflix Technology Blog
+
+Follow
+10 min read
+·
+4 days ago
+246
+
+
+5
+
+
+
+By Sergey Fedorov, Chris Pham, Flavio Ribeiro, Chris Newton, and Wei Wei
+
+Many great ideas at Netflix begin with a question, and three years ago, we asked one of our boldest yet: if we were to entertain the world through Live — a format almost as old as television itself — how would we do it?
+
+What began with an engineering plan to pave the path towards our first Live comedy special, Chris Rock: Selective Outrage, has since led to hundreds of Live events ranging from the biggest comedy shows and NFL Christmas Games to record-breaking boxing fights and becoming the home of WWE.
+
+In our series Behind the Streams — where we take you through the technical journey of our biggest bets — we will do a multiple part deep-dive into the architecture of Live and what we learned while building it. Part one begins with the foundation we set for Live, and the critical decisions we made that influenced our approach.
+
+| But First: What Makes Live Streaming Different?
+While Live as a television format is not new, the streaming experience we intended to build required capabilities we did not have at the time. Despite 15 years of on-demand streaming under our belt, Live introduced new considerations influencing architecture and technology choices:
+
+
+References: 1. Content Pre-Positioning on Open Connect, 2.Load-Balancing Netflix Traffic at Global Scale
+This means that we had a lot to build in order to make Live work well on Netflix. That starts with making the right choices regarding the fundamentals of our Live Architecture.
+
+| Key Pillars of Netflix Live Architecture
+Our Live Technology needed to extend the same promise to members that we’ve made with on-demand streaming: great quality on as many devices as possible without interruptions. Live is one of many entertainment formats on Netflix, so we also needed to seamlessly blend Live events into the user experience, all while scaling to over 300 million global subscribers.
+
+When we started, we had nine months until the first launch. While we needed to execute quickly, we also wanted to architect for future growth in both magnitude and multitude of events. As a key principle, we leveraged our unique position of building support for a single product — Netflix — and having control over the full Live lifecycle, from Production to Screen.
+
+
+Dedicated Broadcast Facilities to Ingest Live Content from Production
+
+Live events can happen anywhere in the world, but not every location has Live facilities or great connectivity. To ensure secure and reliable live signal transport, we leverage distributed and highly connected broadcast operations centers, with specialized equipment for signal ingest and inspection, closed-captioning, graphics and advertisement management. We prioritized repeatability, conditioning engineering to launch live events consistently, reliably, and cost-effectively, leaning into automation wherever possible. As a result, we have been able to reduce the event-specific setup to the transmission between production and the Broadcast Operations Center, reusing the rest across events.
+
+Cloud-based Redundant Transcoding and Packaging Pipelines
+
+The feed received at the Broadcast Center contains a fully produced program, but still needs to be encoded and packaged for streaming on devices. We chose a Cloud-based approach to allow for dynamic scaling, flexibility in configuration, and ease of integration with our Digital Rights Management (DRM), content management, and content delivery services already deployed in the cloud. We leverage AWS MediaConnect and AWS MediaLive to acquire feeds in the cloud and transcode them into various video quality levels with bitrates tailored per show. We built a custom packager to better integrate with our delivery and playback systems. We also built a custom Live Origin to ensure strict read and write SLAs for Live segments.
+
+Scaling Live Content Delivery to millions of viewers with Open Connect CDN
+
+In order for the produced media assets to be streamed, they need to be transferred from a few AWS locations, where Live Origin is deployed, to hundreds of millions of devices worldwide. We leverage Netflix’s CDN, Open Connect, to scale Live asset delivery. Open Connect servers are placed close to the viewers at over 6K locations and connected to AWS locations via a dedicated Open Connect Backbone network.
+
+
+18K+ servers in 6K+ locations, in Internet Exchanges, or embedded into ISP networks
+
+Open Connect Backbone connects servers in Internet Exchange locations to 5 AWS regions
+By enabling Live delivery on Open Connect, we build on top of $1B+ in Netflix investments over the last 12 years focused on scaling the network and optimizing the performance of delivery servers. By sharing capacity across on-demand and Live viewership we improve utilization, and by caching past Live content on the same servers used for on-demand streaming, we can easily enable catch-up viewing.
+
+Optimizing Live Playback for Device Compatibility, Scale, Quality, and Stability
+
+To make Live accessible to the majority of our customers without upgrading their streaming devices, we settled on using HTTPS-based Live Streaming. While UDP-based protocols can provide additional features like ultra-low latency, HTTPS has ubiquitous support among devices and compatibility with delivery and encoding systems. Furthermore, we use AVC and HEVC video codecs, transcode with multiple quality levels up from SD to 4K, and use a 2-second segment duration to balance compression efficiency, infrastructure load, and latency. While prioritizing streaming quality and playback stability, we have also achieved industry standard latency from camera to device, and continue to improve it.
+
+To configure playback, the device player receives a playback manifest at the play start. The manifest contains items like the encoding bitrates and CDN servers players should use. We deliver the manifest from the cloud instead of the CDN, as it allows us to personalize the configuration for each device. To reference segments of the stream, the manifest includes a segment template that is used by devices to map a wall-clock time to URLs on the CDN. Using a segment template vs periodic polling for manifest updates minimizes network dependencies, CDN server load, and overhead on resource-constrained devices, like smart TVs, thus improving both scalability and stability of our system. While streaming, the player monitors network performance and dynamically chooses the bitrate and CDN server, maximizing streaming quality while minimizing rebuffering.
+
+Run Discovery and Playback Control Services in the Cloud
+
+So far, we have covered the streaming path from Camera to Device. To make the stream fully work, we also need to orchestrate across all systems, and ensure viewers can find and start the Live event. This functionality is performed by dozens of Cloud services, with functions like playback configuration, personalization, or metrics collection. These services tend to receive disproportionately higher loads around Live event start time, and Cloud deployment provides flexibility in dynamically scaling compute resources. Moreover, as Live demand tends to be localized, we are able to balance load across multiple AWS regions, better utilizing our global footprint. Deployment in the cloud also allows us to build a user experience where we embed Live content into a broader selection of entertainment options in the UI, like on-demand titles or Games.
+
+Centralize Real-time Metrics in the Cloud with Specialized Tools and Facilities
+
+With control over ingest, encoding pipelines, the Open Connect CDN, and device players, we have nearly end-to-end observability into the Live workflow. During Live, we collect system and user metrics in real-time (e.g., where members see the title on Netflix and their quality of experience), alerting us to poor user experiences or degraded system performance. Our real-time monitoring is built using a mix of internally developed tools, such as Atlas, Mantis, and Lumen, and open-source technologies, such as Kafka and Druid, processing up to 38 million events per second during some of our largest live events while providing critical metrics and operational insights in a matter of seconds. Furthermore, we set up dedicated “Control Center” facilities, which bring key metrics together to the operational team that monitors the event in real-time.
+
+| Our key learnings so far
+Building new functionality always brings fresh challenges and opportunities to learn, especially with a system as complex as Live. Even after three years, we’re still learning every day how to deliver Live events more effectively. Here are a few key highlights:
+
+Extensive testing: Prior to Live we heavily relied on the predictable flow of on-demand traffic for pre-release canaries or A/B tests to validate deployments. But Live traffic was not always available, especially not at the scale representative of a big launch. As a result, we spent considerable effort to:
+
+Generate internal “test streams,” which engineers use to run integration, regression, or smoke tests as part of the development lifecycle.
+Build synthetic load testing capabilities to stress test cloud and CDN systems. We use 2 approaches, allowing us to generate up to 100K starts-per-second:
+— Capture, modify, and replay past Live production traffic, representing a diversity of user devices and request patterns.
+— Virtualize Netflix devices and generate traffic against CDN or Cloud endpoints to test the impact of the latest changes across all systems.
+Run automated failure injection, forcing missing or corrupted segments from the encoding pipeline, loss of a cloud region, network drop, or server timeouts.
+Regular practice: Despite rigorous pre-release testing, nothing beats a production environment, especially when operating at scale. We learned that having a regular schedule with diverse Live content is essential to making improvements while balancing the risks of member impact. We run A/B tests, perform chaos testing, operational exercises, and train operational teams for upcoming launches.
+
+Viewership predictions: We use prediction-based techniques to pre-provision Cloud and CDN capacity, and share forecasts with our ISP and Cloud partners ahead of time so they can plan network and compute resources. Then we complement them with reactive scaling of cloud systems powering sign-up, log-in, title discovery, and playback services to account for viewership exceeding our predictions. We have found success with forward-looking real-time viewership predictions during a live event, allowing us to take steps to mitigate risks earlier, before more members are impacted.
+
+Graceful degradation: Despite our best efforts, we can (and did!) find ourselves in a situation where viewership exceeded our predictions and provisioned capacity. In this case, we developed a number of levers to continue streaming, even if it means gradually removing some nice-to-have features. For example, we use service-level prioritized load shedding to prioritize live traffic over non-critical traffic (like pre-fetch). Beyond that, we can lighten the experience, like dialing down personalization, disabling bookmarks, or lowering the maximum streaming quality. Our load tests include scenarios where we under-scale systems to validate desired behavior.
+
+Retry storms: When systems reach capacity, our key focus is to avoid cascading issues or further overloading systems with retries. Beyond system retries, users may retry manually — we’ve seen a 10x increase in traffic load due to stream restarts after viewing interruptions of as little as 30 seconds. We spent considerable time understanding device retry behavior in the presence of issues like network timeouts or missing segments. As a result, we implemented strategies like server-guided backoff for device retries, absorbing spikes via prioritized traffic shedding at Cloud Edge Gateway, and re-balancing traffic between cloud regions.
+
+Contingency planning: “Everyone has a plan until they get punched in the mouth” is very relevant for Live. When something breaks, there is practically no time for troubleshooting. For large events, we set up in-person launch rooms with engineering owners of critical systems. For quick detection and response, we developed a small set of metrics as early indicators of issues, and have extensive runbooks for common operational issues. We don’t learn on launch day; instead, launch teams practice failure response via Game Day exercises ahead of time. Finally, our runbooks extend beyond engineering, covering escalation to executive leadership and coordination across functions like Customer Service, Production, Communications, or Social.
+
+Our commitment to enhancing the member experience doesn’t end at the “Thanks for Watching!” screen. Shortly after each live stream, we dive into metrics to identify areas for improvement. Our Data & Insights team conducts comprehensive analyses, A/B tests, and consumer research to ensure the next event is even more delightful for our members. We leverage insights on member behavior, preferences, and expectations to refine the Netflix product experience and optimize our Live technology — like reducing latency by ~10 seconds through A/B tests, without affecting quality or stability.
+
+| What’s next on our Live journey?
+Despite three years of effort, we are far from done! In fact, we are just getting started, actively building on the learnings shared above to deliver more joy to our members with Live events. To support the growing number of Live titles and new formats, like FIFA WWC in 2027, we keep building our broadcast and delivery infrastructure and are actively working to further improve the Live experience.
+
+In this post, we’ve provided a broad overview and have barely scratched the surface. In the upcoming posts, we will dive deeper into key pillars of our Live systems, covering our encoding, delivery, playback, and user experience investments in more detail.
+
+Getting this far would not have been possible without the hard work of dozens of teams across Netflix, who collaborate closely to design, build, and operate Live systems: Operations and Reliability, Encoding Technologies, Content Delivery, Device Playback, Streaming Algorithms, UI Engineering, Search and Discovery, Messaging, Content Promotion and Distribution, Data Platform, Cloud Infrastructure, Tooling and Productivity, Program Management, Data Science & Engineering, Product Management, Globalization, Consumer Insights, Ads, Security, Payments, Live Production, Experience and Design, Product Marketing and Customer Service, amongst many others.
+
+Foundation Model for Personalized Recommendation
+Netflix Technology Blog
+Netflix Technology Blog
+
+Follow
+11 min read
+·
+Mar 22, 2025
+1.7K
+
+
+38
+
+
+
+By Ko-Jen Hsiao, Yesu Feng and Sudarshan Lamkhede
+
+Motivation
+Netflix’s personalized recommender system is a complex system, boasting a variety of specialized machine learned models each catering to distinct needs including “Continue Watching” and “Today’s Top Picks for You.” (Refer to our recent overview for more details). However, as we expanded our set of personalization algorithms to meet increasing business needs, maintenance of the recommender system became quite costly. Furthermore, it was difficult to transfer innovations from one model to another, given that most are independently trained despite using common data sources. This scenario underscored the need for a new recommender system architecture where member preference learning is centralized, enhancing accessibility and utility across different models.
+
+Particularly, these models predominantly extract features from members’ recent interaction histories on the platform. Yet, many are confined to a brief temporal window due to constraints in serving latency or training costs. This limitation has inspired us to develop a foundation model for recommendation. This model aims to assimilate information both from members’ comprehensive interaction histories and our content at a very large scale. It facilitates the distribution of these learnings to other models, either through shared model weights for fine tuning or directly through embeddings.
+
+The impetus for constructing a foundational recommendation model is based on the paradigm shift in natural language processing (NLP) to large language models (LLMs). In NLP, the trend is moving away from numerous small, specialized models towards a single, large language model that can perform a variety of tasks either directly or with minimal fine-tuning. Key insights from this shift include:
+
+A Data-Centric Approach: Shifting focus from model-centric strategies, which heavily rely on feature engineering, to a data-centric one. This approach prioritizes the accumulation of large-scale, high-quality data and, where feasible, aims for end-to-end learning.
+Leveraging Semi-Supervised Learning: The next-token prediction objective in LLMs has proven remarkably effective. It enables large-scale semi-supervised learning using unlabeled data while also equipping the model with a surprisingly deep understanding of world knowledge.
+These insights have shaped the design of our foundation model, enabling a transition from maintaining numerous small, specialized models to building a scalable, efficient system. By scaling up semi-supervised training data and model parameters, we aim to develop a model that not only meets current needs but also adapts dynamically to evolving demands, ensuring sustainable innovation and resource efficiency.
+
+Data
+At Netflix, user engagement spans a wide spectrum, from casual browsing to committed movie watching. With over 300 million users at the end of 2024, this translates into hundreds of billions of interactions — an immense dataset comparable in scale to the token volume of large language models (LLMs). However, as in LLMs, the quality of data often outweighs its sheer volume. To harness this data effectively, we employ a process of interaction tokenization, ensuring meaningful events are identified and redundancies are minimized.
+
+Tokenizing User Interactions: Not all raw user actions contribute equally to understanding preferences. Tokenization helps define what constitutes a meaningful “token” in a sequence. Drawing an analogy to Byte Pair Encoding (BPE) in NLP, we can think of tokenization as merging adjacent actions to form new, higher-level tokens. However, unlike language tokenization, creating these new tokens requires careful consideration of what information to retain. For instance, the total watch duration might need to be summed or engagement types aggregated to preserve critical details.
+
+Figure 1.Tokenization of user interaction history by merging actions on the same title, preserving important information.
+This tradeoff between granular data and sequence compression is akin to the balance in LLMs between vocabulary size and context window. In our case, the goal is to balance the length of interaction history against the level of detail retained in individual tokens. Overly lossy tokenization risks losing valuable signals, while too granular a sequence can exceed practical limits on processing time and memory.
+
+Even with such strategies, interaction histories from active users can span thousands of events, exceeding the capacity of transformer models with standard self attention layers. In recommendation systems, context windows during inference are often limited to hundreds of events — not due to model capability but because these services typically require millisecond-level latency. This constraint is more stringent than what is typical in LLM applications, where longer inference times (seconds) are more tolerable.
+
+To address this during training, we implement two key solutions:
+
+Sparse Attention Mechanisms: By leveraging sparse attention techniques such as low-rank compression, the model can extend its context window to several hundred events while maintaining computational efficiency. This enables it to process more extensive interaction histories and derive richer insights into long-term preferences.
+Sliding Window Sampling: During training, we sample overlapping windows of interactions from the full sequence. This ensures the model is exposed to different segments of the user’s history over multiple epochs, allowing it to learn from the entire sequence without requiring an impractically large context window.
+At inference time, when multi-step decoding is needed, we can deploy KV caching to efficiently reuse past computations and maintain low latency.
+
+These approaches collectively allow us to balance the need for detailed, long-term interaction modeling with the practical constraints of model training and inference, enhancing both the precision and scalability of our recommendation system.
+
+Information in Each ‘Token’: While the first part of our tokenization process focuses on structuring sequences of interactions, the next critical step is defining the rich information contained within each token. Unlike LLMs, which typically rely on a single embedding space to represent input tokens, our interaction events are packed with heterogeneous details. These include attributes of the action itself (such as locale, time, duration, and device type) as well as information about the content (such as item ID and metadata like genre and release country). Most of these features, especially categorical ones, are directly embedded within the model, embracing an end-to-end learning approach. However, certain features require special attention. For example, timestamps need additional processing to capture both absolute and relative notions of time, with absolute time being particularly important for understanding time-sensitive behaviors.
+
+To enhance prediction accuracy in sequential recommendation systems, we organize token features into two categories:
+
+Request-Time Features: These are features available at the moment of prediction, such as log-in time, device, or location.
+Post-Action Features: These are details available after an interaction has occurred, such as the specific show interacted with or the duration of the interaction.
+To predict the next interaction, we combine request-time features from the current step with post-action features from the previous step. This blending of contextual and historical information ensures each token in the sequence carries a comprehensive representation, capturing both the immediate context and user behavior patterns over time.
+
+Considerations for Model Objective and Architecture
+As previously mentioned, our default approach employs the autoregressive next-token prediction objective, similar to GPT. This strategy effectively leverages the vast scale of unlabeled user interaction data. The adoption of this objective in recommendation systems has shown multiple successes [1–3]. However, given the distinct differences between language tasks and recommendation tasks, we have made several critical modifications to the objective.
+
+Firstly, during the pretraining phase of typical LLMs, such as GPT, every target token is generally treated with equal weight. In contrast, in our model, not all user interactions are of equal importance. For instance, a 5-minute trailer play should not carry the same weight as a 2-hour full movie watch. A greater challenge arises when trying to align long-term user satisfaction with specific interactions and recommendations. To address this, we can adopt a multi-token prediction objective during training, where the model predicts the next n tokens at each step instead of a single token[4]. This approach encourages the model to capture longer-term dependencies and avoid myopic predictions focused solely on immediate next events.
+
+Secondly, we can use multiple fields in our input data as auxiliary prediction objectives in addition to predicting the next item ID, which remains the primary target. For example, we can derive genres from the items in the original sequence and use this genre sequence as an auxiliary target. This approach serves several purposes: it acts as a regularizer to reduce overfitting on noisy item ID predictions, provides additional insights into user intentions or long-term genre preferences, and, when structured hierarchically, can improve the accuracy of predicting the target item ID. By first predicting auxiliary targets, such as genre or original language, the model effectively narrows down the candidate list, simplifying subsequent item ID prediction.
+
+Unique Challenges for Recommendation FM
+In addition to the infrastructure challenges posed by training bigger models with substantial amounts of user interaction data that are common when trying to build foundation models, there are several unique hurdles specific to recommendations to make them viable. One of unique challenges is entity cold-starting.
+
+At Netflix, our mission is to entertain the world. New titles are added to the catalog frequently. Therefore the recommendation foundation models require a cold start capability, which means the models need to estimate members’ preferences for newly launched titles before anyone has engaged with them. To enable this, our foundation model training framework is built with the following two capabilities: Incremental training and being able to do inference with unseen entities.
+
+Incremental training : Foundation models are trained on extensive datasets, including every member’s history of plays and actions, making frequent retraining impractical. However, our catalog and member preferences continually evolve. Unlike large language models, which can be incrementally trained with stable token vocabularies, our recommendation models require new embeddings for new titles, necessitating expanded embedding layers and output components. To address this, we warm-start new models by reusing parameters from previous models and initializing new parameters for new titles. For example, new title embeddings can be initialized by adding slight random noise to existing average embeddings or by using a weighted combination of similar titles’ embeddings based on metadata. This approach allows new titles to start with relevant embeddings, facilitating faster fine-tuning. In practice, the initialization method becomes less critical when more member interaction data is used for fine-tuning.
+Dealing with unseen entities : Even with incremental training, it’s not always guaranteed to learn efficiently on new entities (ex: newly launched titles). It’s also possible that there will be some new entities that are not included/seen in the training data even if we fine-tune foundation models on a frequent basis. Therefore, it’s also important to let foundation models use metadata information of entities and inputs, not just member interaction data. Thus, our foundation model combines both learnable item id embeddings and learnable embeddings from metadata. The following diagram demonstrates this idea.
+Figure 2. Titles are associated with various metadata, such as genres, storylines, and tones. Each type of metadata could be represented by averaging its respective embeddings, which are then concatenated to form the overall metadata-based embedding for the title.
+To create the final title embedding, we combine this metadata-based embedding with a fully-learnable ID-based embedding using a mixing layer. Instead of simply summing these embeddings, we use an attention mechanism based on the “age” of the entity. This approach allows new titles with limited interaction data to rely more on metadata, while established titles can depend more on ID-based embeddings. Since titles with similar metadata can have different user engagement, their embeddings should reflect these differences. Introducing some randomness during training encourages the model to learn from metadata rather than relying solely on ID embeddings. This method ensures that newly-launched or pre-launch titles have reasonable embeddings even with no user interaction data.
+
+Downstream Applications and Challenges
+Our recommendation foundation model is designed to understand long-term member preferences and can be utilized in various ways by downstream applications:
+
+Direct Use as a Predictive Model The model is primarily trained to predict the next entity a user will interact with. It includes multiple predictor heads for different tasks, such as forecasting member preferences for various genres. These can be directly applied to meet diverse business needs..
+Utilizing embeddings The model generates valuable embeddings for members and entities like videos, games, and genres. These embeddings are calculated in batch jobs and stored for use in both offline and online applications. They can serve as features in other models or be used for candidate generation, such as retrieving appealing titles for a user. High-quality title embeddings also support title-to-title recommendations. However, one important consideration is that the embedding space has arbitrary, uninterpretable dimensions and is incompatible across different model training runs. This poses challenges for downstream consumers, who must adapt to each retraining and redeployment, risking bugs due to invalidated assumptions about the embedding structure. To address this, we apply an orthogonal low-rank transformation to stabilize the user/item embedding space, ensuring consistent meaning of embedding dimensions, even as the base foundation model is retrained and redeployed.
+Fine-Tuning with Specific Data The model’s adaptability allows for fine-tuning with application-specific data. Users can integrate the full model or subgraphs into their own models, fine-tuning them with less data and computational power. This approach achieves performance comparable to previous models, despite the initial foundation model requiring significant resources.
+Scaling Foundation Models for Netflix Recommendations
+In scaling up our foundation model for Netflix recommendations, we draw inspiration from the success of large language models (LLMs). Just as LLMs have demonstrated the power of scaling in improving performance, we find that scaling is crucial for enhancing generative recommendation tasks. Successful scaling demands robust evaluation, efficient training algorithms, and substantial computing resources. Evaluation must effectively differentiate model performance and identify areas for improvement. Scaling involves data, model, and context scaling, incorporating user engagement, external reviews, multimedia assets, and high-quality embeddings. Our experiments confirm that the scaling law also applies to our foundation model, with consistent improvements observed as we increase data and model size.
+
+Figure 3. The relationship between model parameter size and relative performance improvement. The plot demonstrates the scaling law in recommendation modeling, showing a trend of increased performance with larger model sizes. The x-axis is logarithmically scaled to highlight growth across different magnitudes.
+Conclusion
+In conclusion, our Foundation Model for Personalized Recommendation represents a significant step towards creating a unified, data-centric system that leverages large-scale data to increase the quality of recommendations for our members. This approach borrows insights from Large Language Models (LLMs), particularly the principles of semi-supervised learning and end-to-end training, aiming to harness the vast scale of unlabeled user interaction data. Addressing unique challenges, like cold start and presentation bias, the model also acknowledges the distinct differences between language tasks and recommendation. The Foundation Model allows various downstream applications, from direct use as a predictive model to generate user and entity embeddings for other applications, and can be fine-tuned for specific canvases. We see promising results from downstream integrations. This move from multiple specialized models to a more comprehensive system marks an exciting development in the field of personalized recommendation systems.
+
+Acknowledgements
+Contributors to this work (name in alphabetical order): Ai-Lei Sun Aish Fenton Anne Cocos Anuj Shah Arash Aghevli Baolin Li Bowei Yan Dan Zheng Dawen Liang Ding Tong Divya Gadde Emma Kong Gary Yeh Inbar Naor Jin Wang Justin Basilico Kabir Nagrecha Kevin Zielnicki Linas Baltrunas Lingyi Liu Luke Wang Matan Appelbaum Michael Tu Moumita Bhattacharya Pablo Delgado Qiuling Xu Rakesh Komuravelli Raveesh Bhalla Rob Story Roger Menezes Sejoon Oh Shahrzad Naseri Swanand Joshi Trung Nguyen Vito Ostuni Wei Wang Zhe Zhang
+
+Reference
+C. K. Kang and J. McAuley, “Self-Attentive Sequential Recommendation,” 2018 IEEE International Conference on Data Mining (ICDM), Singapore, 2018, pp. 197–206, doi: 10.1109/ICDM.2018.00035.
+F. Sun et al., “BERT4Rec: Sequential Recommendation with Bidirectional Encoder Representations from Transformer,” Proceedings of the 28th ACM International Conference on Information and Knowledge Management (CIKM ‘19), Beijing, China, 2019, pp. 1441–1450, doi: 10.1145/3357384.3357895.
+J. Zhai et al., “Actions Speak Louder than Words: Trillion-Parameter Sequential Transducers for Generative Recommendations,” arXiv preprint arXiv:2402.17152, 2024.
+F. Gloeckle, B. Youbi Idrissi, B. Rozière, D. Lopez-Paz, and G. Synnaeve, “Better & Faster Large Language Models via Multi-token Prediction,” arXiv preprint arXiv:2404.19737, Apr. 2024.
+
+
+
+
+Foundation Model for Personalized Recommendation
+Netflix Technology Blog
+Netflix Technology Blog
+
+Follow
+11 min read
+·
+Mar 22, 2025
+1.7K
+
+
+38
+
+
+
+By Ko-Jen Hsiao, Yesu Feng and Sudarshan Lamkhede
+
+Motivation
+Netflix’s personalized recommender system is a complex system, boasting a variety of specialized machine learned models each catering to distinct needs including “Continue Watching” and “Today’s Top Picks for You.” (Refer to our recent overview for more details). However, as we expanded our set of personalization algorithms to meet increasing business needs, maintenance of the recommender system became quite costly. Furthermore, it was difficult to transfer innovations from one model to another, given that most are independently trained despite using common data sources. This scenario underscored the need for a new recommender system architecture where member preference learning is centralized, enhancing accessibility and utility across different models.
+
+Particularly, these models predominantly extract features from members’ recent interaction histories on the platform. Yet, many are confined to a brief temporal window due to constraints in serving latency or training costs. This limitation has inspired us to develop a foundation model for recommendation. This model aims to assimilate information both from members’ comprehensive interaction histories and our content at a very large scale. It facilitates the distribution of these learnings to other models, either through shared model weights for fine tuning or directly through embeddings.
+
+The impetus for constructing a foundational recommendation model is based on the paradigm shift in natural language processing (NLP) to large language models (LLMs). In NLP, the trend is moving away from numerous small, specialized models towards a single, large language model that can perform a variety of tasks either directly or with minimal fine-tuning. Key insights from this shift include:
+
+A Data-Centric Approach: Shifting focus from model-centric strategies, which heavily rely on feature engineering, to a data-centric one. This approach prioritizes the accumulation of large-scale, high-quality data and, where feasible, aims for end-to-end learning.
+Leveraging Semi-Supervised Learning: The next-token prediction objective in LLMs has proven remarkably effective. It enables large-scale semi-supervised learning using unlabeled data while also equipping the model with a surprisingly deep understanding of world knowledge.
+These insights have shaped the design of our foundation model, enabling a transition from maintaining numerous small, specialized models to building a scalable, efficient system. By scaling up semi-supervised training data and model parameters, we aim to develop a model that not only meets current needs but also adapts dynamically to evolving demands, ensuring sustainable innovation and resource efficiency.
+
+Data
+At Netflix, user engagement spans a wide spectrum, from casual browsing to committed movie watching. With over 300 million users at the end of 2024, this translates into hundreds of billions of interactions — an immense dataset comparable in scale to the token volume of large language models (LLMs). However, as in LLMs, the quality of data often outweighs its sheer volume. To harness this data effectively, we employ a process of interaction tokenization, ensuring meaningful events are identified and redundancies are minimized.
+
+Tokenizing User Interactions: Not all raw user actions contribute equally to understanding preferences. Tokenization helps define what constitutes a meaningful “token” in a sequence. Drawing an analogy to Byte Pair Encoding (BPE) in NLP, we can think of tokenization as merging adjacent actions to form new, higher-level tokens. However, unlike language tokenization, creating these new tokens requires careful consideration of what information to retain. For instance, the total watch duration might need to be summed or engagement types aggregated to preserve critical details.
+
+Figure 1.Tokenization of user interaction history by merging actions on the same title, preserving important information.
+This tradeoff between granular data and sequence compression is akin to the balance in LLMs between vocabulary size and context window. In our case, the goal is to balance the length of interaction history against the level of detail retained in individual tokens. Overly lossy tokenization risks losing valuable signals, while too granular a sequence can exceed practical limits on processing time and memory.
+
+Even with such strategies, interaction histories from active users can span thousands of events, exceeding the capacity of transformer models with standard self attention layers. In recommendation systems, context windows during inference are often limited to hundreds of events — not due to model capability but because these services typically require millisecond-level latency. This constraint is more stringent than what is typical in LLM applications, where longer inference times (seconds) are more tolerable.
+
+To address this during training, we implement two key solutions:
+
+Sparse Attention Mechanisms: By leveraging sparse attention techniques such as low-rank compression, the model can extend its context window to several hundred events while maintaining computational efficiency. This enables it to process more extensive interaction histories and derive richer insights into long-term preferences.
+Sliding Window Sampling: During training, we sample overlapping windows of interactions from the full sequence. This ensures the model is exposed to different segments of the user’s history over multiple epochs, allowing it to learn from the entire sequence without requiring an impractically large context window.
+At inference time, when multi-step decoding is needed, we can deploy KV caching to efficiently reuse past computations and maintain low latency.
+
+These approaches collectively allow us to balance the need for detailed, long-term interaction modeling with the practical constraints of model training and inference, enhancing both the precision and scalability of our recommendation system.
+
+Information in Each ‘Token’: While the first part of our tokenization process focuses on structuring sequences of interactions, the next critical step is defining the rich information contained within each token. Unlike LLMs, which typically rely on a single embedding space to represent input tokens, our interaction events are packed with heterogeneous details. These include attributes of the action itself (such as locale, time, duration, and device type) as well as information about the content (such as item ID and metadata like genre and release country). Most of these features, especially categorical ones, are directly embedded within the model, embracing an end-to-end learning approach. However, certain features require special attention. For example, timestamps need additional processing to capture both absolute and relative notions of time, with absolute time being particularly important for understanding time-sensitive behaviors.
+
+To enhance prediction accuracy in sequential recommendation systems, we organize token features into two categories:
+
+Request-Time Features: These are features available at the moment of prediction, such as log-in time, device, or location.
+Post-Action Features: These are details available after an interaction has occurred, such as the specific show interacted with or the duration of the interaction.
+To predict the next interaction, we combine request-time features from the current step with post-action features from the previous step. This blending of contextual and historical information ensures each token in the sequence carries a comprehensive representation, capturing both the immediate context and user behavior patterns over time.
+
+Considerations for Model Objective and Architecture
+As previously mentioned, our default approach employs the autoregressive next-token prediction objective, similar to GPT. This strategy effectively leverages the vast scale of unlabeled user interaction data. The adoption of this objective in recommendation systems has shown multiple successes [1–3]. However, given the distinct differences between language tasks and recommendation tasks, we have made several critical modifications to the objective.
+
+Firstly, during the pretraining phase of typical LLMs, such as GPT, every target token is generally treated with equal weight. In contrast, in our model, not all user interactions are of equal importance. For instance, a 5-minute trailer play should not carry the same weight as a 2-hour full movie watch. A greater challenge arises when trying to align long-term user satisfaction with specific interactions and recommendations. To address this, we can adopt a multi-token prediction objective during training, where the model predicts the next n tokens at each step instead of a single token[4]. This approach encourages the model to capture longer-term dependencies and avoid myopic predictions focused solely on immediate next events.
+
+Secondly, we can use multiple fields in our input data as auxiliary prediction objectives in addition to predicting the next item ID, which remains the primary target. For example, we can derive genres from the items in the original sequence and use this genre sequence as an auxiliary target. This approach serves several purposes: it acts as a regularizer to reduce overfitting on noisy item ID predictions, provides additional insights into user intentions or long-term genre preferences, and, when structured hierarchically, can improve the accuracy of predicting the target item ID. By first predicting auxiliary targets, such as genre or original language, the model effectively narrows down the candidate list, simplifying subsequent item ID prediction.
+
+Unique Challenges for Recommendation FM
+In addition to the infrastructure challenges posed by training bigger models with substantial amounts of user interaction data that are common when trying to build foundation models, there are several unique hurdles specific to recommendations to make them viable. One of unique challenges is entity cold-starting.
+
+At Netflix, our mission is to entertain the world. New titles are added to the catalog frequently. Therefore the recommendation foundation models require a cold start capability, which means the models need to estimate members’ preferences for newly launched titles before anyone has engaged with them. To enable this, our foundation model training framework is built with the following two capabilities: Incremental training and being able to do inference with unseen entities.
+
+Incremental training : Foundation models are trained on extensive datasets, including every member’s history of plays and actions, making frequent retraining impractical. However, our catalog and member preferences continually evolve. Unlike large language models, which can be incrementally trained with stable token vocabularies, our recommendation models require new embeddings for new titles, necessitating expanded embedding layers and output components. To address this, we warm-start new models by reusing parameters from previous models and initializing new parameters for new titles. For example, new title embeddings can be initialized by adding slight random noise to existing average embeddings or by using a weighted combination of similar titles’ embeddings based on metadata. This approach allows new titles to start with relevant embeddings, facilitating faster fine-tuning. In practice, the initialization method becomes less critical when more member interaction data is used for fine-tuning.
+Dealing with unseen entities : Even with incremental training, it’s not always guaranteed to learn efficiently on new entities (ex: newly launched titles). It’s also possible that there will be some new entities that are not included/seen in the training data even if we fine-tune foundation models on a frequent basis. Therefore, it’s also important to let foundation models use metadata information of entities and inputs, not just member interaction data. Thus, our foundation model combines both learnable item id embeddings and learnable embeddings from metadata. The following diagram demonstrates this idea.
+Figure 2. Titles are associated with various metadata, such as genres, storylines, and tones. Each type of metadata could be represented by averaging its respective embeddings, which are then concatenated to form the overall metadata-based embedding for the title.
+To create the final title embedding, we combine this metadata-based embedding with a fully-learnable ID-based embedding using a mixing layer. Instead of simply summing these embeddings, we use an attention mechanism based on the “age” of the entity. This approach allows new titles with limited interaction data to rely more on metadata, while established titles can depend more on ID-based embeddings. Since titles with similar metadata can have different user engagement, their embeddings should reflect these differences. Introducing some randomness during training encourages the model to learn from metadata rather than relying solely on ID embeddings. This method ensures that newly-launched or pre-launch titles have reasonable embeddings even with no user interaction data.
+
+Downstream Applications and Challenges
+Our recommendation foundation model is designed to understand long-term member preferences and can be utilized in various ways by downstream applications:
+
+Direct Use as a Predictive Model The model is primarily trained to predict the next entity a user will interact with. It includes multiple predictor heads for different tasks, such as forecasting member preferences for various genres. These can be directly applied to meet diverse business needs..
+Utilizing embeddings The model generates valuable embeddings for members and entities like videos, games, and genres. These embeddings are calculated in batch jobs and stored for use in both offline and online applications. They can serve as features in other models or be used for candidate generation, such as retrieving appealing titles for a user. High-quality title embeddings also support title-to-title recommendations. However, one important consideration is that the embedding space has arbitrary, uninterpretable dimensions and is incompatible across different model training runs. This poses challenges for downstream consumers, who must adapt to each retraining and redeployment, risking bugs due to invalidated assumptions about the embedding structure. To address this, we apply an orthogonal low-rank transformation to stabilize the user/item embedding space, ensuring consistent meaning of embedding dimensions, even as the base foundation model is retrained and redeployed.
+Fine-Tuning with Specific Data The model’s adaptability allows for fine-tuning with application-specific data. Users can integrate the full model or subgraphs into their own models, fine-tuning them with less data and computational power. This approach achieves performance comparable to previous models, despite the initial foundation model requiring significant resources.
+Scaling Foundation Models for Netflix Recommendations
+In scaling up our foundation model for Netflix recommendations, we draw inspiration from the success of large language models (LLMs). Just as LLMs have demonstrated the power of scaling in improving performance, we find that scaling is crucial for enhancing generative recommendation tasks. Successful scaling demands robust evaluation, efficient training algorithms, and substantial computing resources. Evaluation must effectively differentiate model performance and identify areas for improvement. Scaling involves data, model, and context scaling, incorporating user engagement, external reviews, multimedia assets, and high-quality embeddings. Our experiments confirm that the scaling law also applies to our foundation model, with consistent improvements observed as we increase data and model size.
+
+Figure 3. The relationship between model parameter size and relative performance improvement. The plot demonstrates the scaling law in recommendation modeling, showing a trend of increased performance with larger model sizes. The x-axis is logarithmically scaled to highlight growth across different magnitudes.
+Conclusion
+In conclusion, our Foundation Model for Personalized Recommendation represents a significant step towards creating a unified, data-centric system that leverages large-scale data to increase the quality of recommendations for our members. This approach borrows insights from Large Language Models (LLMs), particularly the principles of semi-supervised learning and end-to-end training, aiming to harness the vast scale of unlabeled user interaction data. Addressing unique challenges, like cold start and presentation bias, the model also acknowledges the distinct differences between language tasks and recommendation. The Foundation Model allows various downstream applications, from direct use as a predictive model to generate user and entity embeddings for other applications, and can be fine-tuned for specific canvases. We see promising results from downstream integrations. This move from multiple specialized models to a more comprehensive system marks an exciting development in the field of personalized recommendation systems.
+
+Acknowledgements
+Contributors to this work (name in alphabetical order): Ai-Lei Sun Aish Fenton Anne Cocos Anuj Shah Arash Aghevli Baolin Li Bowei Yan Dan Zheng Dawen Liang Ding Tong Divya Gadde Emma Kong Gary Yeh Inbar Naor Jin Wang Justin Basilico Kabir Nagrecha Kevin Zielnicki Linas Baltrunas Lingyi Liu Luke Wang Matan Appelbaum Michael Tu Moumita Bhattacharya Pablo Delgado Qiuling Xu Rakesh Komuravelli Raveesh Bhalla Rob Story Roger Menezes Sejoon Oh Shahrzad Naseri Swanand Joshi Trung Nguyen Vito Ostuni Wei Wang Zhe Zhang
+
+Reference
+C. K. Kang and J. McAuley, “Self-Attentive Sequential Recommendation,” 2018 IEEE International Conference on Data Mining (ICDM), Singapore, 2018, pp. 197–206, doi: 10.1109/ICDM.2018.00035.
+F. Sun et al., “BERT4Rec: Sequential Recommendation with Bidirectional Encoder Representations from Transformer,” Proceedings of the 28th ACM International Conference on Information and Knowledge Management (CIKM ‘19), Beijing, China, 2019, pp. 1441–1450, doi: 10.1145/3357384.3357895.
+J. Zhai et al., “Actions Speak Louder than Words: Trillion-Parameter Sequential Transducers for Generative Recommendations,” arXiv preprint arXiv:2402.17152, 2024.
+F. Gloeckle, B. Youbi Idrissi, B. Rozière, D. Lopez-Paz, and G. Synnaeve, “Better & Faster Large Language Models via Multi-token Prediction,” arXiv preprint arXiv:2404.19737, Apr. 2024.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -4,17 +4,22 @@ import (
 	"bytes"
 	"compress/gzip"
 	"encoding/json"
+	"fmt"
 	"log"
 	"net/http"
 	"os"
 	"time"
 
+	"github.com/DataDog/zstd"
 	"github.com/andybalholm/brotli"
-	"github.com/klauspost/compress/zstd"
 )
 
-var (
-	filePath = "./saokearibank.csv"
+const (
+	// filePath = "./saokearibank.csv" // 4.4MB
+	// filePath = "./body.txt" // 2kB
+	filePath = "./100kb.txt" // 107kB
+	// how hard should the compressor work to reduce size?
+	COMPRESS_LEVEL = 20
 )
 
 type CompressRequest struct {
@@ -26,66 +31,64 @@ type CompressResponse struct {
 	InputSize      int     `json:"input_size"`
 	OutputSize     int     `json:"output_size"`
 	Ratio          float64 `json:"ratio"`
+	CompressRatio  string  `json:"compress_ratio"`
 	DurationMillis int64   `json:"duration_ms"`
 }
 
-func compressGzip(data []byte) ([]byte, int64, error) {
+func compressGzip(data []byte) (int, int64, error) {
 	var buf bytes.Buffer
 	start := time.Now()
-	w := gzip.NewWriter(&buf)
+	w, _ := gzip.NewWriterLevel(&buf, COMPRESS_LEVEL)
 	_, err := w.Write(data)
 	if err != nil {
-		return nil, 0, err
+		return 0, 0, err
 	}
 	w.Close()
-	return buf.Bytes(), time.Since(start).Milliseconds(), nil
+	return len(buf.Bytes()), time.Since(start).Milliseconds(), nil
 }
 
-func compressBrotli(data []byte) ([]byte, int64, error) {
+func compressBrotli(data []byte) (int, int64, error) {
 	var buf bytes.Buffer
 	start := time.Now()
-	w := brotli.NewWriter(&buf)
+	w := brotli.NewWriterLevel(&buf, COMPRESS_LEVEL)
 	_, err := w.Write(data)
 	if err != nil {
-		return nil, 0, err
+		return 0, 0, err
 	}
 	w.Close()
-	return buf.Bytes(), time.Since(start).Milliseconds(), nil
+	return len(buf.Bytes()), time.Since(start).Milliseconds(), nil
 }
 
-func compressZstd(data []byte) ([]byte, int64, error) {
-	var buf bytes.Buffer
+func compressZstd(data []byte) (int, int64, error) {
+	var buf []byte
 	start := time.Now()
-	enc, err := zstd.NewWriter(&buf)
+	out, err := zstd.CompressLevel(buf, data, COMPRESS_LEVEL)
 	if err != nil {
-		return nil, 0, err
+		return 0, 0, err
 	}
-	_, err = enc.Write(data)
-	if err != nil {
-		return nil, 0, err
-	}
-	enc.Close()
-	return buf.Bytes(), time.Since(start).Milliseconds(), nil
+	return len(out), time.Since(start).Milliseconds(), nil
 }
 
-func compressHandler(algo string, compressFunc func([]byte) ([]byte, int64, error)) http.HandlerFunc {
+func compressHandler(algo string, compressFunc func([]byte) (int, int64, error)) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		data, err := os.ReadFile(filePath)
 		if err != nil {
 			http.Error(w, "Cannot read file", http.StatusInternalServerError)
 			return
 		}
-		out, ms, err := compressFunc(data)
+
+		outSize, ms, err := compressFunc(data)
 		if err != nil {
 			http.Error(w, "Compression error", http.StatusInternalServerError)
 			return
 		}
-
+		ratio := float64(len(data)) / float64(outSize)
 		res := CompressResponse{
 			Algo:           algo,
 			InputSize:      len(data),
-			OutputSize:     len(out),
-			Ratio:          float64(len(out)) / float64(len(data)),
+			OutputSize:     outSize,
+			Ratio:          ratio,
+			CompressRatio:  fmt.Sprintf("%.2f%%", float64(outSize)/float64(len(data))*100),
 			DurationMillis: ms,
 		}
 		w.Header().Set("Content-Type", "application/json")
@@ -100,3 +103,7 @@ func main() {
 	log.Println("Listening on :8080 ...")
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
+
+// http://localhost:8080/compress/zip
+// http://localhost:8080/compress/br
+// http://localhost:8080/compress/zstd
