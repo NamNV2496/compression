@@ -3,8 +3,11 @@ package main
 import (
 	"bytes"
 	"compress/gzip"
+	"crypto/md5"
+	"encoding/hex"
 	"encoding/json"
 	"fmt"
+	"io"
 	"log"
 	"net/http"
 	"os"
@@ -19,7 +22,7 @@ const (
 	// filePath = "./body.txt" // 2kB
 	filePath = "./100kb.txt" // 107kB
 	// how hard should the compressor work to reduce size?
-	COMPRESS_LEVEL = 20
+	COMPRESS_LEVEL = 5
 )
 
 type CompressRequest struct {
@@ -35,7 +38,14 @@ type CompressResponse struct {
 	DurationMillis int64   `json:"duration_ms"`
 }
 
+// ad verify input and output
+func computeMD5(data []byte) string {
+	hash := md5.Sum(data)
+	return hex.EncodeToString(hash[:])
+}
+
 func compressGzip(data []byte) (int, int64, error) {
+	md5Before := computeMD5(data)
 	var buf bytes.Buffer
 	start := time.Now()
 	w, _ := gzip.NewWriterLevel(&buf, COMPRESS_LEVEL)
@@ -44,7 +54,25 @@ func compressGzip(data []byte) (int, int64, error) {
 		return 0, 0, err
 	}
 	w.Close()
-	return len(buf.Bytes()), time.Since(start).Milliseconds(), nil
+	output := len(buf.Bytes())
+	// Decompress to validate
+	gr, err := gzip.NewReader(&buf)
+	if err != nil {
+		return 0, 0, fmt.Errorf("failed to unzip for validation: %w", err)
+	}
+	defer gr.Close()
+
+	decompressedData, err := io.ReadAll(gr)
+	if err != nil {
+		return 0, 0, fmt.Errorf("failed to read decompressed data: %w", err)
+	}
+
+	md5After := computeMD5(decompressedData)
+	if md5Before != md5After {
+		return 0, 0, fmt.Errorf("data mismatch after decompression")
+	}
+	log.Printf("md5Before: %s, md5After: %s", md5Before, md5After)
+	return output, time.Since(start).Milliseconds(), nil
 }
 
 func compressBrotli(data []byte) (int, int64, error) {
@@ -104,6 +132,6 @@ func main() {
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
 
-// http://localhost:8080/compress/zip
+// http://localhost:8080/compress/gzip
 // http://localhost:8080/compress/br
 // http://localhost:8080/compress/zstd
