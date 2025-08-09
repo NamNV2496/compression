@@ -5,6 +5,10 @@ package main
 // 	"testing"
 // )
 
+// const (
+// 	filePath = "./100kb.txt" // 107kB
+
+// )
 // var benchData []byte
 
 // func init() {
